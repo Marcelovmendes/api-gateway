@@ -1,0 +1,26 @@
+{{ define "HealthEndpoints" }}
+{
+  "endpoint": "/api/health/spotify",
+  "method": "GET",
+  "timeout": "5s",
+  "output_encoding": "no-op",
+  "backend": [{
+    "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
+    "url_pattern": "/actuator/health",
+    "method": "GET",
+    "encoding": "no-op"
+  }]
+},
+{
+  "endpoint": "/api/health/youtube",
+  "method": "GET",
+  "timeout": "5s",
+  "output_encoding": "no-op",
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/health",
+    "method": "GET",
+    "encoding": "no-op"
+  }]
+}
+{{ end }}

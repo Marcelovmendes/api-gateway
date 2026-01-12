@@ -1,0 +1,39 @@
+{{ define "ConversionEndpoints" }}
+{
+  "endpoint": "/api/conversions",
+  "method": "POST",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie", "Content-Type"],
+  "backend": [{
+    "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
+    "url_pattern": "/conversions",
+    "method": "POST",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/conversions/{jobId}/status",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "backend": [{
+    "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
+    "url_pattern": "/conversions/{jobId}/status",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+}
+{{ end }}
