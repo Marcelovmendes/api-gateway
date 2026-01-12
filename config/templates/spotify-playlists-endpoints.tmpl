@@ -1,0 +1,98 @@
+{{ define "SpotifyPlaylistsEndpoints" }}
+{
+  "endpoint": "/api/spotify/users/details",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie"],
+  "backend": [{
+    "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
+    "url_pattern": "/users/details",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/spotify/playlists",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie"],
+  "backend": [{
+    "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
+    "url_pattern": "/playlists/",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/spotify/playlists/tracks",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie"],
+  "backend": [{
+    "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
+    "url_pattern": "/playlists/tracks",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/spotify/playlists/{playlistId}/tracks",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie"],
+  "input_query_strings": ["offset", "limit"],
+  "backend": [{
+    "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
+    "url_pattern": "/playlists/{playlistId}/tracks",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/spotify/playlists/saved-tracks",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie"],
+  "backend": [{
+    "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
+    "url_pattern": "/playlists/saved-tracks",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+}
+{{ end }}

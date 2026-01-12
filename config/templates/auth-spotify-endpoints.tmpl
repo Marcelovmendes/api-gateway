@@ -1,0 +1,21 @@
+{{ define "AuthSpotifyEndpoints" }}
+{
+  "endpoint": "/api/auth/spotify/link-youtube",
+  "method": "POST",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie", "Content-Type"],
+  "backend": [{
+    "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
+    "url_pattern": "/auth/link-youtube",
+    "method": "POST",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+}
+{{ end }}
