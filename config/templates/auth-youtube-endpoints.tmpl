@@ -1,0 +1,59 @@
+{{ define "AuthYoutubeEndpoints" }}
+{
+  "endpoint": "/api/auth/youtube/refresh",
+  "method": "POST",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie", "Content-Type"],
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/v1/auth/refresh",
+    "method": "POST",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/auth/youtube/logout",
+  "method": "POST",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie", "Content-Type"],
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/v1/auth/logout",
+    "method": "POST",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/auth/youtube/session",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie"],
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/v1/auth/session",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+}
+{{ end }}

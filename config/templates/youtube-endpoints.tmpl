@@ -1,0 +1,119 @@
+{{ define "YoutubeEndpoints" }}
+{
+  "endpoint": "/api/youtube/playlists",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie"],
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/v1/playlists",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/youtube/playlists",
+  "method": "POST",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie", "Content-Type"],
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/v1/playlists",
+    "method": "POST",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/youtube/playlists/{playlistId}/videos",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie"],
+  "input_query_strings": ["maxResults", "pageToken"],
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/v1/playlists/{playlistId}/videos",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/youtube/playlists/{playlistId}/videos",
+  "method": "POST",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie", "Content-Type"],
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/v1/playlists/{playlistId}/videos",
+    "method": "POST",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/youtube/search",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie"],
+  "input_query_strings": ["q", "maxResults"],
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/v1/search",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/api/youtube/search/music",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_headers": ["Cookie"],
+  "input_query_strings": ["track", "artist"],
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/v1/search/music",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true,
+        "return_error_details": "log"
+      }
+    }
+  }]
+}
+{{ end }}
