@@ -1,0 +1,18 @@
+services:
+  api-gateway:
+    image: devopsfaith/krakend:2.7
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./config:/etc/krakend/config
+    command: ["run", "-dc", "config/krakend.tmpl"]
+    environment:
+      - FC_ENABLE=1
+      - FC_SETTINGS=config/settings
+      - FC_TEMPLATES=config/templates
+      - FC_OUT=/tmp/krakend.json
+      - SPOTIFY_SERVICE_URL=${SPOTIFY_SERVICE_URL:-http://host.docker.internal:8080}
+      - YOUTUBE_SERVICE_URL=${YOUTUBE_SERVICE_URL:-http://host.docker.internal:8081}
+      - FRONTEND_URL=${FRONTEND_URL:-http://127.0.0.1:3000}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

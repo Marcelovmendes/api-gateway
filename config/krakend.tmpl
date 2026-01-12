@@ -1,0 +1,29 @@
+{
+  "$schema": "https://www.krakend.io/schema/v2.7/krakend.json",
+  "version": 3,
+  "port": 8000,
+  "timeout": "30s",
+  "extra_config": {
+    "telemetry/logging": {
+      "level": "INFO",
+      "prefix": "[KRAKEND]",
+      "syslog": false,
+      "stdout": true
+    },
+    "router": {
+      "auto_options": true
+    },
+    "security/cors": {
+      "allow_origins": ["{{ env "FRONTEND_URL" }}"],
+      "allow_methods": ["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"],
+      "expose_headers": ["Content-Length", "Content-Type", "Set-Cookie"],
+      "allow_headers": ["Content-Type", "Authorization", "Cookie", "Accept-Language"],
+      "max_age": "12h",
+      "allow_credentials": true,
+      "debug": true
+    }
+  },
+  "endpoints": [
+    {{ template "Endpoints" }}
+  ]
+}
