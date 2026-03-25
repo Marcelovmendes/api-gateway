@@ -1,5 +1,41 @@
 {{ define "AuthSpotifyEndpoints" }}
 {
+  "endpoint": "/auth/",
+  "method": "GET",
+  "timeout": "10s",
+  "output_encoding": "no-op",
+  "backend": [{
+    "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
+    "url_pattern": "/auth/",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/auth/callback",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_query_strings": ["code", "state", "error"],
+  "input_headers": ["Cookie"],
+  "backend": [{
+    "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
+    "url_pattern": "/auth/callback",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true
+      }
+    }
+  }]
+},
+{
   "endpoint": "/api/auth/spotify/link-youtube",
   "method": "POST",
   "timeout": "30s",
