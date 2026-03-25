@@ -12,6 +12,13 @@
     "extra_config": {
       "backend/http": {
         "return_error_code": true
+      },
+      "modifier/martian": {
+        "header.Modifier": {
+          "scope": ["request"],
+          "name": "X-Forwarded-Host",
+          "value": "api.pswap.tech"
+        }
       }
     }
   }]
@@ -57,6 +64,13 @@
       "backend/http": {
         "return_error_code": true,
         "return_error_details": "log"
+      },
+      "modifier/martian": {
+        "header.Modifier": {
+          "scope": ["request"],
+          "name": "X-Forwarded-Host",
+          "value": "api.pswap.tech"
+        }
       }
     }
   }]
