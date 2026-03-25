@@ -22,7 +22,7 @@
   "timeout": "30s",
   "output_encoding": "no-op",
   "input_query_strings": ["code", "state", "error"],
-  "input_headers": ["Cookie"],
+  "input_headers": ["Cookie", "X-Forwarded-Host"],
   "backend": [{
     "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
     "url_pattern": "/auth/callback",
