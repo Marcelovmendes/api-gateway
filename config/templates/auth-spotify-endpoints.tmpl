@@ -22,7 +22,7 @@
   "timeout": "30s",
   "output_encoding": "no-op",
   "input_query_strings": ["code", "state", "error"],
-  "input_headers": ["Cookie", "X-Forwarded-Host"],
+  "input_headers": ["Cookie"],
   "backend": [{
     "host": ["{{ env "SPOTIFY_SERVICE_URL" }}"],
     "url_pattern": "/auth/callback",
@@ -31,6 +31,13 @@
     "extra_config": {
       "backend/http": {
         "return_error_code": true
+      },
+      "modifier/martian": {
+        "header.Modifier": {
+          "scope": ["request"],
+          "name": "X-Forwarded-Host",
+          "value": "api.pswap.tech"
+        }
       }
     }
   }]
