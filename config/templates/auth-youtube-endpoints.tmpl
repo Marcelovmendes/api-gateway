@@ -1,5 +1,55 @@
 {{ define "AuthYoutubeEndpoints" }}
 {
+  "endpoint": "/v1/auth/",
+  "method": "GET",
+  "timeout": "10s",
+  "output_encoding": "no-op",
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/v1/auth/",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true
+      },
+      "modifier/martian": {
+        "header.Modifier": {
+          "scope": ["request"],
+          "name": "X-Forwarded-Host",
+          "value": "api.pswap.tech"
+        }
+      }
+    }
+  }]
+},
+{
+  "endpoint": "/v1/auth/google/callback",
+  "method": "GET",
+  "timeout": "30s",
+  "output_encoding": "no-op",
+  "input_query_strings": ["code", "state", "error"],
+  "input_headers": ["Cookie"],
+  "backend": [{
+    "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
+    "url_pattern": "/v1/auth/google/callback",
+    "method": "GET",
+    "encoding": "no-op",
+    "extra_config": {
+      "backend/http": {
+        "return_error_code": true
+      },
+      "modifier/martian": {
+        "header.Modifier": {
+          "scope": ["request"],
+          "name": "X-Forwarded-Host",
+          "value": "api.pswap.tech"
+        }
+      }
+    }
+  }]
+},
+{
   "endpoint": "/api/auth/youtube/refresh",
   "method": "POST",
   "timeout": "30s",
@@ -14,6 +64,13 @@
       "backend/http": {
         "return_error_code": true,
         "return_error_details": "log"
+      },
+      "modifier/martian": {
+        "header.Modifier": {
+          "scope": ["request"],
+          "name": "X-Forwarded-Host",
+          "value": "api.pswap.tech"
+        }
       }
     }
   }]
@@ -33,6 +90,13 @@
       "backend/http": {
         "return_error_code": true,
         "return_error_details": "log"
+      },
+      "modifier/martian": {
+        "header.Modifier": {
+          "scope": ["request"],
+          "name": "X-Forwarded-Host",
+          "value": "api.pswap.tech"
+        }
       }
     }
   }]
@@ -52,6 +116,13 @@
       "backend/http": {
         "return_error_code": true,
         "return_error_details": "log"
+      },
+      "modifier/martian": {
+        "header.Modifier": {
+          "scope": ["request"],
+          "name": "X-Forwarded-Host",
+          "value": "api.pswap.tech"
+        }
       }
     }
   }]
