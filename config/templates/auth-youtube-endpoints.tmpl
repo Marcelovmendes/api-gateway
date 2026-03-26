@@ -1,12 +1,12 @@
 {{ define "AuthYoutubeEndpoints" }}
 {
-  "endpoint": "/v1/auth/",
+  "endpoint": "/v1/auth",
   "method": "GET",
   "timeout": "10s",
   "output_encoding": "no-op",
   "backend": [{
     "host": ["{{ env "YOUTUBE_SERVICE_URL" }}"],
-    "url_pattern": "/v1/auth/",
+    "url_pattern": "/v1/auth",
     "method": "GET",
     "encoding": "no-op",
     "extra_config": {
